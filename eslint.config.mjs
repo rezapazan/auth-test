@@ -7,7 +7,7 @@ const __dirname = dirname(__filename);
 
 const compat = new FlatCompat({
   recommendedConfig: {
-    "ignorePatterns": [
+    ignorePatterns: [
       "dist",
       ".next",
       "node_modules",
@@ -15,12 +15,12 @@ const compat = new FlatCompat({
       "**/*.mjs",
       "**/*.cjs",
     ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
+    parser: "@typescript-eslint/parser",
+    parserOptions: {
       "projectService": true,
       "ecmaFeatures": { "jsx": true },
     },
-    "settings": {
+    settings: {
       "react": { "version": "detect" },
       "import/resolver": { "typescript": true, "node": true },
     },
@@ -32,7 +32,6 @@ const compat = new FlatCompat({
       "no-useless-escape": "off",
       "@typescript-eslint/no-explicit-any": "warn",
       "@typescript-eslint/ban-ts-comment": "warn",
-      "@typescript-eslint/no-unused-vars": "warn",
       "@typescript-eslint/no-empty-object-type": "warn",
       "@typescript-eslint/no-duplicate-enum-values": "warn",
       "@typescript-eslint/no-namespace": "off",
@@ -49,16 +48,6 @@ const compat = new FlatCompat({
       "react/display-name": "warn",
       "react/jsx-key": "warn",
       "react-hooks/rules-of-hooks": "warn",
-      "unused-imports/no-unused-imports": "error",
-      // "unused-imports/no-unused-vars": [
-      //   "warn",
-      //   {
-      //     "vars": "all",
-      //     "varsIgnorePattern": "^_",
-      //     "args": "after-used",
-      //     "argsIgnorePattern": "^_",
-      //   },
-      // ],
     }
   },
   baseDirectory: __dirname,
@@ -71,6 +60,21 @@ const eslintConfig = [
     "plugin:react-hooks/recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended"),
+  {
+    rules: {
+      "no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": "warn",
+      "unused-imports/no-unused-vars": [
+        "warn",
+        {
+          vars: "all",
+          varsIgnorePattern: "^_",
+          args: "after-used",
+          argsIgnorePattern: "^_",
+        },
+      ],
+    }
+  }
 ];
 
 export default eslintConfig;

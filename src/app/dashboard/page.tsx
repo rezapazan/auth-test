@@ -1,20 +1,24 @@
 "use client";
 
-import { type User } from "@/services/client/randomuser/randomuser.types";
 import { useRouter } from "next/navigation";
-import { useMemo } from "react";
+import { useEffect } from "react";
 import styles from "./styles.module.scss";
 
 const Dashboard = () => {
   const user: string = localStorage.getItem("user") ?? "";
   const router = useRouter();
 
-  if (!user || user.length < 1) router.replace("/");
+  useEffect(() => {
+    if (!user) {
+      router.replace("/auth");
+    }
+  }, [user, router]);
 
-  const userData = useMemo<User>(() => {
-    return JSON.parse(user);
-  }, [user]);
+  if (!user) {
+    return null;
+  }
 
+  const userData = JSON.parse(user);
   return (
     <div className={styles["dashboard"]}>
       Welcome, {userData.name.title}. {userData.name.last}
