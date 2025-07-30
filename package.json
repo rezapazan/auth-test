@@ -11,9 +11,15 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@geist-ui/icons": "^1.0.2",
+    "@hookform/resolvers": "^5.2.1",
+    "clsx": "^2.1.1",
+    "geist": "^1.4.2",
     "next": "15.4.5",
     "react": "19.1.0",
-    "react-dom": "19.1.0"
+    "react-dom": "19.1.0",
+    "react-hook-form": "^7.61.1",
+    "zod": "^4.0.14"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -32,6 +38,7 @@
     "husky": "^9.1.7",
     "lint-staged": "^16.1.2",
     "prettier": "^3.6.2",
+    "sass": "^1.89.2",
     "typescript": "^5"
   }
 }

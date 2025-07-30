@@ -32,7 +32,7 @@ const compat = new FlatCompat({
       "no-useless-escape": "off",
       "@typescript-eslint/no-explicit-any": "warn",
       "@typescript-eslint/ban-ts-comment": "warn",
-      "@typescript-eslint/no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": "warn",
       "@typescript-eslint/no-empty-object-type": "warn",
       "@typescript-eslint/no-duplicate-enum-values": "warn",
       "@typescript-eslint/no-namespace": "off",
@@ -50,15 +50,15 @@ const compat = new FlatCompat({
       "react/jsx-key": "warn",
       "react-hooks/rules-of-hooks": "warn",
       "unused-imports/no-unused-imports": "error",
-      "unused-imports/no-unused-vars": [
-        "warn",
-        {
-          "vars": "all",
-          "varsIgnorePattern": "^_",
-          "args": "after-used",
-          "argsIgnorePattern": "^_",
-        },
-      ],
+      // "unused-imports/no-unused-vars": [
+      //   "warn",
+      //   {
+      //     "vars": "all",
+      //     "varsIgnorePattern": "^_",
+      //     "args": "after-used",
+      //     "argsIgnorePattern": "^_",
+      //   },
+      // ],
     }
   },
   baseDirectory: __dirname,

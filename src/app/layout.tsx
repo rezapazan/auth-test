@@ -1,5 +1,8 @@
+import clsx from "clsx";
+import { GeistSans } from "geist/font/sans";
 import type { Metadata } from "next";
-import "./globals.css";
+import "./globals.scss";
+import styles from "./main.module.scss";
 
 export const metadata: Metadata = {
   title: "Auth Test App",
@@ -12,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={clsx(styles["layout"], GeistSans.className)}>
       <body>{children}</body>
     </html>
   );
