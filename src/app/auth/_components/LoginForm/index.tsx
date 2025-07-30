@@ -3,12 +3,17 @@
 import Button from "@/components/Button";
 import { Input } from "@/components/Input";
 import { LoginSchema } from "@/schemas/login";
+import { randomUser } from "@/services/client/randomuser/randomuser.api";
 import { type LoginInputs } from "@/types/login";
 import { zodResolver } from "@hookform/resolvers/zod";
+import clsx from "clsx";
+import { useRouter } from "next/navigation";
 import { type SubmitHandler, useForm } from "react-hook-form";
 import styles from "./styles.module.scss";
 
 const LoginForm = () => {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -17,7 +22,19 @@ const LoginForm = () => {
     resolver: zodResolver(LoginSchema),
   });
 
-  const onSubmit: SubmitHandler<LoginInputs> = (data) => console.log(data);
+  const { mutate, isPending } = randomUser.useMutation({
+    onSuccess: (res) => {
+      localStorage.setItem("user", JSON.stringify(res.results[0]));
+      router.push("/dashboard");
+    },
+    onError: () => {
+      router.replace("/");
+    },
+  });
+
+  const onSubmit: SubmitHandler<LoginInputs> = () => {
+    mutate();
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles["login"]}>
@@ -45,11 +62,14 @@ const LoginForm = () => {
       />
 
       <Button
-        className={styles["login__submit"]}
-        onClick={() => console.log("Clicked Login!")}
+        disabled={isPending}
+        className={clsx(
+          styles["login__submit"],
+          isPending && styles["login__submit--disabled"],
+        )}
         type="submit"
       >
-        Login
+        {isPending ? "Logging In..." : "Login"}
       </Button>
     </form>
   );
